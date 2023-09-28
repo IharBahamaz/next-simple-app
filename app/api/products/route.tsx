@@ -3,7 +3,7 @@ import schema from './schema';
 
 export function GET(
   request: NextRequest,
-  { params }: { params: { id: number } }
+  { params }: { params: { id: string } }
 ) {
   // preventing caching by adding NextRequest
   return NextResponse.json([
