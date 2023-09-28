@@ -16,4 +16,5 @@ model User {
   name      String
   followers Int     @default(0)
   isActive  Boolean @default(true)
+  registeredAt DateTime @default(now())
 }
