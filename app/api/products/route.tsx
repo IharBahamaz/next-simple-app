@@ -1,16 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import schema from './schema';
+import prisma from '@/prisma/client';
 
-export function GET(
+export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const products = await prisma.product.findMany();
   // preventing caching by adding NextRequest
-  return NextResponse.json([
-    { id: 1, name: 'iphone', price: 2.5 },
-    { id: 2, name: 'glove', price: 3.5 },
-    { id: 3, name: 'hammer', price: 99.99 },
-  ]);
+  return NextResponse.json(products);
 }
 
 export async function PUT(
@@ -36,10 +34,15 @@ export async function POST(request: NextRequest) {
   const validation = schema.safeParse(body);
 
   if (!validation.success) return NextResponse.json(validation.error.errors);
-  return NextResponse.json(
-    { id: 10, name: body.name, price: body.price },
-    { status: 201 }
-  );
+
+  const newProduct = await prisma.product.create({
+    data: {
+      name: body.name,
+      price: body.price,
+    },
+  });
+
+  return NextResponse.json(newProduct, { status: 201 });
 }
 
 export function DELETE(
