@@ -14,6 +14,12 @@ const UploadPage = () => {
       {publicId && <CldImage src={publicId} width={270} height={180} alt="A" />}
       <CldUploadWidget
         uploadPreset="fpvzxzrf"
+        options={{
+          sources: ['local'],
+          multiple: false,
+          maxFiles: 5,
+          styles: {},
+        }}
         onUpload={(result, widget) => {
           if (result.event !== 'success') return;
           const info = result.info as CloudinaryResult;
