@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import {
   Html,
   Body,
@@ -6,20 +6,33 @@ import {
   Text,
   Link,
   Preview,
+  Tailwind,
 } from '@react-email/components';
 
 const WelcomeTemplate = ({ name }: { name: string }) => {
   return (
     <Html>
       <Preview>Welcome aboard!</Preview>
-      <Body>
-        <Container>
-          <Text>Hello {name}</Text>
-          <Link href={'https://codewithmosh.com'}>codeoffantasy@gmail.com</Link>
-        </Container>
-      </Body>
+      <Tailwind>
+        <Body className="bg-white">
+          <Container>
+            <Text className="font-bold text-3xl">Hello {name}</Text>
+            <Link href={'https://codewithmosh.com'}>
+              codeoffantasy@gmail.com
+            </Link>
+          </Container>
+        </Body>
+      </Tailwind>
     </Html>
   );
+};
+
+const body: CSSProperties = {
+  background: '#fff',
+};
+
+const heading: CSSProperties = {
+  fontSize: '32px',
 };
 
 export default WelcomeTemplate;
