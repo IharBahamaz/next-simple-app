@@ -9,8 +9,8 @@ interface Props {
 const UsersPage = async ({ searchParams: { sortOrder } }: Props) => {
   return (
     <>
-      <h1> Users</h1>
-      <Link href="/users/new" className="btn">
+      <h1 style={{ marginBottom: 10 }}> Users</h1>
+      <Link href='/users/new' className='btn'>
         New User
       </Link>
       <Suspense fallback={<p>Loading...</p>}>
